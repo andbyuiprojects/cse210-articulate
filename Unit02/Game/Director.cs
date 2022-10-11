@@ -48,7 +48,7 @@ namespace Unit02.Game
         {
             Console.Write("Roll dice? [y/n] ");
             string rollDice = Console.ReadLine();
-            _isPlaying = (rollDice == "y");
+            _isPlaying = (rollDice.ToLower() == "y");
         }
 
         /// <summary>
@@ -56,6 +56,7 @@ namespace Unit02.Game
         /// </summary>
         public void DoUpdates()
         {
+            //same thing as (_isPlaying == false)
             if (!_isPlaying)
             {
                 return;
@@ -65,7 +66,7 @@ namespace Unit02.Game
             foreach (Die die in _dice)
             {
                 die.Roll();
-                _score += die.points;
+                _score += die._points;
             }
             _totalScore += _score;
         }
@@ -83,13 +84,14 @@ namespace Unit02.Game
             string values = "";
             foreach (Die die in _dice)
             {
-                values += $"{die.value} ";
+                values += $"{die._value} ";
             }
 
             Console.WriteLine($"You rolled: {values}");
             Console.WriteLine($"Your score is: {_totalScore}\n");
             _isPlaying = (_score > 0);
         }
+        
     }
 }
 
